@@ -1,0 +1,11 @@
+
+
+core_db:
+  build:
+    context: .
+    dockerfile: db_dockerfile
+
+  ports:
+    - 5433:5432
+  volumes:
+    - core_db:/var/lib/postgresql/data
