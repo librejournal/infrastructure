@@ -1,11 +1,26 @@
 
 
-core_db:
-  build:
-    context: .
-    dockerfile: db_dockerfile
+# core librejournal
 
-  ports:
-    - 5433:5432
+core:
+  build:
+    context: ../../core
+    dockerfile: Dockerfile.local
   volumes:
-    - core_db:/var/lib/postgresql/data
+    - ../../core/core:/usr/src/librejournal/core
+  depends_on:
+    - core_db
+  ports:
+    - 9001:5000
+  command: ./start_local.sh
+
+
+core_db:
+    build:
+      context: .
+      dockerfile: db_dockerfile
+  
+    ports:
+      - 5433:5432
+    volumes:
+      - core_db:/var/lib/postgresql/data
