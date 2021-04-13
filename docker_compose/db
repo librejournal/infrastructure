@@ -1,0 +1,3 @@
+POSTGRES_DB=librejournal
+POSTGRES_PASSWORD=librejournalDB2021
+POSTGRES_USER=librejournal
