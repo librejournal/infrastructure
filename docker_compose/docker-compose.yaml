@@ -28,3 +28,8 @@ services:
         - 5433:5432
       volumes:
         - ./core_db:/var/lib/postgresql/librejournal
+
+  rabbitmq:
+    image: rabbitmq:latest
+    env_file:
+      - env_rabbitmq
