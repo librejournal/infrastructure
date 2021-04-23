@@ -26,12 +26,31 @@ services:
         volumes:
             - core_db:/var/lib/postgresql/data
 
-    
-
     rabbitmq:
+        hostname: rabbit
         image: rabbitmq:latest
         env_file:
         - env_rabbitmq
+
+    redis:
+        image: redis:latest
+        ports:
+            - 6379:6379
+
+    celery_worker:
+        restart: always
+        build:
+            context: ../../core
+            dockerfile: Dockerfile.worker
+        volumes:
+            - ../../core/core:/usr/src/librejournal/core
+        env_file:
+            - ../../core/env_variables/env
+        depends_on:
+            - core_db
+            - core
+            - redis
+            - rabbitmq
 
 volumes:
     core_db:
