@@ -1,35 +1,37 @@
-
-
-# core librejournal
 version: "3"
 services:
-  core:
-    build:
-      context: ../../core
-      dockerfile: Dockerfile.local
-    env_file:
-      - ../../core/env_variables/env
-    volumes:
-      - ../../core/core:/usr/src/librejournal/core
-    depends_on:
-      - core_db
-    ports:
-      - 9001:5000
-    command: ./start_local.sh
+    core:
+        build:
+            context: ../../core
+            dockerfile: Dockerfile.local
+        env_file:
+            - ../../core/env_variables/env
+        volumes:
+            - ../../core/core:/usr/src/librejournal/core
+        depends_on:
+            - core_db
+        ports:
+            - 9001:5000
+        command: ./start_local.sh
 
 
-  core_db:
-      build:
-        context: .
-        dockerfile: db_dockerfile
-      env_file:
-        - ./db
-      ports:
-        - 5433:5432
-      volumes:
-        - ./core_db:/var/lib/postgresql/librejournal
+    core_db:
+        build:
+            context: .
+            dockerfile: db_dockerfile
+        env_file:
+            - ./db
+        ports:
+            - 5433:5432
+        volumes:
+            - core_db:/var/lib/postgresql/data
 
-  rabbitmq:
-    image: rabbitmq:latest
-    env_file:
-      - env_rabbitmq
+    
+
+    rabbitmq:
+        image: rabbitmq:latest
+        env_file:
+        - env_rabbitmq
+
+volumes:
+    core_db:
