@@ -7,7 +7,7 @@ services:
         env_file:
             - ../../core/env_variables/env
         volumes:
-            - ../../core/core:/usr/src/librejournal/core
+            - ../../core:/usr/src/librejournal/core
         depends_on:
             - core_db
         ports:
@@ -43,7 +43,7 @@ services:
             context: ../../core
             dockerfile: Dockerfile.worker
         volumes:
-            - ../../core/core:/usr/src/librejournal/core
+            - ../../core:/usr/src/librejournal/core
         env_file:
             - ../../core/env_variables/env
         depends_on:
