@@ -7,7 +7,7 @@ services:
         env_file:
             - ../../core/env_variables/env
         volumes:
-            - ../../core:/usr/src/librejournal/core
+            - ../../core:/usr/src/librejournal
         depends_on:
             - core_db
         ports:
