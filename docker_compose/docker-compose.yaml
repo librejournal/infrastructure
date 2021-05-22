@@ -13,6 +13,8 @@ services:
         ports:
             - 9001:5000
         command: bash start_local.sh
+        stdin_open: true
+        tty: true
 
 
     core_db:
@@ -39,6 +41,8 @@ services:
         ports:
             - 9002:5000
         command: bash start_local.sh
+        stdin_open: true
+        tty: true
 
     files_db:
         build:
