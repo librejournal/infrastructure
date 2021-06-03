@@ -28,32 +28,32 @@ services:
         volumes:
             - core_db:/var/lib/postgresql/data
 
-    files:
-        build:
-            context: ../../files
-            dockerfile: Dockerfile.local
-        env_file:
-            - ../../files/env_variables/env
-        volumes:
-            - ../../files:/usr/src/files
-        depends_on:
-            - files_db
-        ports:
-            - 9002:5000
-        command: bash start_local.sh
-        stdin_open: true
-        tty: true
+    # files:
+    #     build:
+    #         context: ../../files
+    #         dockerfile: Dockerfile.local
+    #     env_file:
+    #         - ../../files/env_variables/env
+    #     volumes:
+    #         - ../../files:/usr/src/files
+    #     depends_on:
+    #         - files_db
+    #     ports:
+    #         - 9002:5000
+    #     command: bash start_local.sh
+    #     stdin_open: true
+    #     tty: true
 
-    files_db:
-        build:
-            context: .
-            dockerfile: db_dockerfile
-        env_file:
-            - ./db
-        ports:
-            - 5434:5432
-        volumes:
-            - files_db:/var/lib/postgresql/data
+    # files_db:
+    #     build:
+    #         context: .
+    #         dockerfile: db_dockerfile
+    #     env_file:
+    #         - ./db
+    #     ports:
+    #         - 5434:5432
+    #     volumes:
+    #         - files_db:/var/lib/postgresql/data
 
     rabbitmq:
         hostname: rabbit
@@ -66,7 +66,7 @@ services:
         ports:
             - 6379:6379
 
-    celery_worker:
+    core_celery_worker:
         restart: always
         build:
             context: ../../core
@@ -83,4 +83,4 @@ services:
 
 volumes:
     core_db:
-    files_db:
+    # files_db:
