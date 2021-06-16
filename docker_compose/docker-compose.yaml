@@ -29,7 +29,6 @@ services:
             - core_db:/var/lib/postgresql/data
 
     rabbitmq:
-        hostname: rabbit
         image: rabbitmq:latest
         env_file:
             - env_rabbitmq
